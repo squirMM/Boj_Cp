@@ -9,11 +9,12 @@ int times,M,N;
 int dx[4] = { 0, 0, 1, -1 };
 int dy[4] = { 1, -1, 0, 0 };
 
+
 bool check_range(int y , int x) {
 	if (x < 0 || y < 0 || x >= M || y >= N)return false;
 	else return true;
 }
-
+//find dfs
 bool dfs(int y, int x) {
 	if (check[y][x])return false;
 	check[y][x] = true;
