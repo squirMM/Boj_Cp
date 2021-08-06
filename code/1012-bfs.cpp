@@ -2,33 +2,40 @@
 #include<vector>
 #include<algorithm>
 #include<cstring>
+#include<utility>
+#include<queue>
 using namespace std;
 bool check[51][51];
 int ground[51][51];
-int times,M,N;
+queue<pair<int,int> >q;
+int times,M,N,cnt;
 int dx[4] = { 0, 0, 1, -1 };
 int dy[4] = { 1, -1, 0, 0 };
 
-//check change
 bool check_range(int y , int x) {
 	if (x < 0 || y < 0 || x >= M || y >= N)return false;
 	else return true;
 }
-//find dfs
-bool dfs(int y, int x) {
-	if (check[y][x])return false;
-	check[y][x] = true;
-	for (int i = 0; i < 4; i++) {
-		int nx = x + dx[i];
-		int ny = y + dy[i];
-		if (check_range(ny, nx)&& ground[ny][nx]==1)dfs(ny, nx);
-	}
-	return true;
+
+void bfs(int y , int x){
+    q.push(make_pair(y,x));
+    while(q.size()){
+        pair<int,int> tmp= q.front();
+        q.pop();
+        if(ground[tmp.first][tmp.second]!=1 || check[tmp.first][tmp.second])continue;
+        check[tmp.first][tmp.second]=true;
+        for(int i=0 ; i<4 ; i++){
+            int nx= tmp.second+dx[i];
+            int ny= tmp.first+dy[i];
+            if(check_range(ny,nx))q.push(make_pair(ny,nx));
+        }
+    }
+   
 }
+
 int main() {
 	ios_base::sync_with_stdio(NULL);
 	cin.tie(NULL);
-	cout<<"hello"<<endl;
 	cin >> times;
 	int K,x,y;
 	while (times--) {
@@ -40,16 +47,18 @@ int main() {
 		while (K--) {
 			cin >> x >> y;
 			ground[y][x] = 1;
-			v.push_back(make_pair(x, y));
+			v.push_back(make_pair(y, x));
 		}
-		int cnt = 0;
+		cnt = 0;
 		for (int i = 0; i < v.size(); i++) {
-			int cx = v[i].first;
-			int cy = v[i].second;
+			int cx = v[i].second;
+			int cy = v[i].first;
 			if (ground[cy][cx] == 1 && !check[cy][cx]) {
-				if (dfs(cy, cx)) {cout<<cx<<cy<<endl; cnt++; }
+				bfs(cy,cx);
+                cnt++;
 			}
 		}
+
 		cout << cnt << endl;
 
 	}
