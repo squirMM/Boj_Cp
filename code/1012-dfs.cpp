@@ -28,6 +28,7 @@ bool dfs(int y, int x) {
 int main() {
 	ios_base::sync_with_stdio(NULL);
 	cin.tie(NULL);
+	cout<<"hello"<<endl;
 	cin >> times;
 	int K,x,y;
 	while (times--) {
