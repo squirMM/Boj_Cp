@@ -9,8 +9,7 @@ bool check[51][51];
 int ground[51][51];
 queue<pair<int,int> >q;
 int times,M,N,cnt;
-int dx[4] = { 0, 0, 1, -1 };
-int dy[4] = { 1, -1, 0, 0 };
+int dx[4] = { 0, 0, 1, -1 };int dy[4] = { 1, -1, 0, 0 };
 
 bool check_range(int y , int x) {
 	if (x < 0 || y < 0 || x >= M || y >= N)return false;
