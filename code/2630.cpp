@@ -8,7 +8,6 @@ bool equalArray(int x , int y, int num , int color){
     for(int i=x ; i<x+num ; i++){
         for(int j=y ; j<y+num ;  j++){
             if(v[i][j]!=color)return false;
-            if(x==0 && y ==4) cout<<v[i][j]<<"\n";
         }
     }
     return true;
@@ -27,6 +26,9 @@ void dc(int x , int y, int num){
     }
 }
 int main(){
+    ios_base::sync_with_stdio(NULL);
+	cin.tie(NULL);
+    
     int N;
     cin>>N;
     for(int i=0 ; i<N ;i++){
